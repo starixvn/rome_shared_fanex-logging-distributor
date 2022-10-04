@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F9AA0828-273A-4C4B-A73E-7EEF4C533E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Logging.Distributor", "src\Fanex.Logging.Distributor\Fanex.Logging.Distributor.csproj", "{871F5B5B-BADF-4060-83DC-4ACC7380556C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{871F5B5B-BADF-4060-83DC-4ACC7380556C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871F5B5B-BADF-4060-83DC-4ACC7380556C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871F5B5B-BADF-4060-83DC-4ACC7380556C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871F5B5B-BADF-4060-83DC-4ACC7380556C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{871F5B5B-BADF-4060-83DC-4ACC7380556C} = {F9AA0828-273A-4C4B-A73E-7EEF4C533E83}
+	EndGlobalSection
+EndGlobal

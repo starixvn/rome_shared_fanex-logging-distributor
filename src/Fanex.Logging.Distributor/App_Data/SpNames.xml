@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="WriteLog">
+    <Setting Key="WriteLog_AppLog" SpName="WriteLog_AppLog" DbName="DBLOG.bodb_CustomerLog.BODBAdminNet" />
+    <Setting Key="Acc_AppLog_CategoryIns" SpName="Acc_AppLog_CategoryIns" DbName="DBLOG.bodb_CustomerLog.BODBAdminNet" />
+  </Function>
+</Functions>
