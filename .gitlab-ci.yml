@@ -1,0 +1,4 @@
+include:
+  - project: "ci/repos-ci/rome_fanex_logging_distributor"
+    ref: master
+    file: "gitlab-ci.yml"

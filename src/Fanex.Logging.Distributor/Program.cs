@@ -1,7 +1,8 @@
 ﻿using Fanex.Logging.Distributor.Extensions;
 using Fanex.Logging.Distributor.Services;
+using Microsoft.AspNetCore.Hosting;
 
-var builder = Host.CreateDefaultBuilder(args)
+await Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
         var configuration = hostContext.Configuration;
@@ -9,7 +10,7 @@ var builder = Host.CreateDefaultBuilder(args)
         services.AddFanexData(configuration);
         services.AddSingleton<ILogService, LogService>();
         services.AddHostedService<ConsumeRabbitMQHostedService>();
-    });
-
-var host = builder.Build();
-await host.RunAsync();
+    })
+    .ConfigureWebHostDefaults(webBuilder => webBuilder.UseUrls("http://0.0.0.0:5000"))
+    .Build()
+    .RunAsync();
