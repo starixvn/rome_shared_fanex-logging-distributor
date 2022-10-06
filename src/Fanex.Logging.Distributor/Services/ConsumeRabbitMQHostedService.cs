@@ -30,7 +30,7 @@ public class ConsumeRabbitMQHostedService : BackgroundService
         var rabbitMQConnectionString = EasyNetQConnectionStringCryptography.DecryptConnectionString(options.ConnectionString);
         await logger.InfoAsync(rabbitMQConnectionString);
         using var rabbitMQBus = RabbitHutch.CreateBus(rabbitMQConnectionString);
-        rabbitMQBus.SubscribeAsync<LogEntry>(RoutingKey, async (logEntry) =>
+        rabbitMQBus.Subscribe<LogEntry>(RoutingKey, async (logEntry) =>
         {
             await logger.InfoAsync($"Received");
             if (logEntry != null)
