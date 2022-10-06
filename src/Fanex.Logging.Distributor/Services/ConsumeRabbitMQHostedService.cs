@@ -19,15 +19,16 @@ public class ConsumeRabbitMQHostedService : BackgroundService
         this.logService = logService;
     }
 
-    protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        InitRabbitMQ();
-        return Task.CompletedTask;
+        await InitRabbitMQ();
     }
 
-    public void InitRabbitMQ()
+    public async Task InitRabbitMQ()
     {
+        await logger.InfoAsync(options.ConnectionString);
         var rabbitMQConnectionString = EasyNetQConnectionStringCryptography.DecryptConnectionString(options.ConnectionString);
+        await logger.InfoAsync(rabbitMQConnectionString);
         using var rabbitMQBus = RabbitHutch.CreateBus(rabbitMQConnectionString);
         rabbitMQBus.SubscribeAsync<LogEntry>(RoutingKey, async (logEntry) =>
         {
