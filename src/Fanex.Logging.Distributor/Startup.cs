@@ -17,6 +17,7 @@ public class Startup
         services
             .AddConfig(Configuration)
             .AddFanexData(Configuration)
+            .AddSingleton(Logger.Log)
             .AddSingleton<ILogService, Services.LogService>()
             .AddHostedService<ConsumeRabbitMQHostedService>()
             .AddHealthChecks();

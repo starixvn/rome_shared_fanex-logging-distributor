@@ -9,10 +9,10 @@ public class ConsumeRabbitMQHostedService : BackgroundService
 {
     private const string RoutingKey = "RabbitMQTraceListener.LogEntryQueueRouteKey";
     private readonly RabbitMQOptions options;
-    private readonly ILogger<ConsumeRabbitMQHostedService> logger;
+    private readonly ILogger logger;
     private readonly ILogService logService;
 
-    public ConsumeRabbitMQHostedService(IOptions<RabbitMQOptions> options, ILogger<ConsumeRabbitMQHostedService> logger, ILogService logService)
+    public ConsumeRabbitMQHostedService(IOptions<RabbitMQOptions> options, ILogger logger, ILogService logService)
     {
         this.options = options.Value;
         this.logger = logger;
@@ -29,14 +29,13 @@ public class ConsumeRabbitMQHostedService : BackgroundService
     {
         var rabbitMQConnectionString = EasyNetQConnectionStringCryptography.DecryptConnectionString(options.ConnectionString);
         using var rabbitMQBus = RabbitHutch.CreateBus(rabbitMQConnectionString);
-        rabbitMQBus.SubscribeAsync<LogEntry>(RoutingKey, (logEntry) =>
+        rabbitMQBus.SubscribeAsync<LogEntry>(RoutingKey, async (logEntry) =>
         {
+            await logger.InfoAsync($"Received");
             if (logEntry != null)
             {
-                return logService.WriteLog(logEntry);
+                await logService.WriteLog(logEntry);
             }
-
-            return Task.CompletedTask;
         }, config => config.WithTopic(RoutingKey));
     }
 }
