@@ -19,8 +19,7 @@ public class LogService : ILogService
 
     public async Task WriteLog(LogEntry logEntry)
     {
-        var command = logEntry.Categories != null && logEntry.Categories.Any()
-        ? new WriteLogCommand
+        var command = new WriteLogCommand
         {
             AppDomainName = logEntry.AppDomainName,
             EventId = logEntry.EventId,
@@ -29,7 +28,7 @@ public class LogService : ILogService
             Priority = logEntry.Priority,
             ProcessId = logEntry.ProcessId,
             ProcessName = logEntry.ProcessName,
-            ThreadName = logEntry.ManagedThreadName,
+            ThreadName = logEntry.ManagedThreadName ?? string.Empty,
             Severity = logEntry.Severity.ToString(),
             TimeStamp = logEntry.TimeStamp,
             Title = logEntry.Title,
@@ -49,8 +48,7 @@ public class LogService : ILogService
                 $"Thread Name: {logEntry.ManagedThreadName}",
                 $"Win32 ThreadId: {logEntry.Win32ThreadId}",
                 $"Extended Properties: {string.Join(",", logEntry.ExtendedProperties.Select(p => $"{p.Key} - {p.Value}").ToArray())}")
-        }
-        : new WriteLogCommand { Message = logEntry.Message };
+        };
 
         await dynamicRepository.ExecuteAsync(command);
 

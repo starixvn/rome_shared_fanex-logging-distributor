@@ -9,7 +9,10 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddConfig(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<RabbitMQOptions>(configuration.GetSection(RabbitMQOptions.RabbitMQ));
+        var rabbitMQOptions = new RabbitMQOptions();
+        configuration.GetSection(RabbitMQOptions.RabbitMQ).Bind(rabbitMQOptions);
+        services.AddSingleton(rabbitMQOptions);
+
         return services;
     }
 
