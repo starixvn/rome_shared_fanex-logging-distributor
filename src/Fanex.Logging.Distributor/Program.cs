@@ -23,8 +23,6 @@ try
         })
         .Build()
         .RunAsync();
-
-    Logger.Log.Info($"{appName} has been started up.");
 }
 catch (Exception ex)
 {
