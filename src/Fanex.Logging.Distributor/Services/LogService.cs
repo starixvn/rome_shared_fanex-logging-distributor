@@ -37,7 +37,7 @@ public class LogService : ILogService
                 TimeStamp = logEntry.TimeStamp,
                 Title = logEntry.Title,
                 Win32ThreadId = logEntry.Win32ThreadId,
-                FormattedMessage = string.Join(Environment.NewLine,
+                FormattedMessage = string.Join("\r\n",
                            $"Timestamp: {logEntry.TimeStamp}",
                            $"Message: {logEntry.Message}",
                            $"Category: {logEntry.Categories.FirstOrDefault()}",
